@@ -1,0 +1,1 @@
+# ST - Środki Trwałe
