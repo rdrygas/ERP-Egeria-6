@@ -1,0 +1,32 @@
+/*
+    Zapytanie zwracające listę załączników powiązanych ze środkami trwałymi,
+    które nie mają powiązanych dokumentów z określonymi kodami likwidacji.
+*/
+WITH SDN_ZLIKW AS (
+    SELECT DISTINCT 
+        SDN.SDN_S_ID AS S_ID
+    FROM 
+        KGT_DOKUMENTY DOK
+        JOIN STT_SRODKI_DANE SDN ON DOK.DOK_SDN_ID = SDN.SDN_ID
+    WHERE 
+        DOK.DOK_RDOK_KOD IN ('PL1', 'PL2', 'LAS', 'LM') -- Kody dokumentów likwidacji
+)
+
+SELECT DISTINCT
+    ST.S_ID,
+    ST.S_NUMER_INW AS NR_INWENTARZOWY,
+    ZAL.ZAL_NAZWA AS NAZWA,
+    ZAL.ZAL_OPIS AS OPIS,
+    ZAL.ZAL_NAZWA_PLIKU AS NAZWA_PLIKU
+FROM 
+    STT_SRODKI ST
+    JOIN STT_SRODKI_DANE SDN ON ST.S_ID = SDN.SDN_S_ID
+    JOIN STT_STANY_SRODKA STS ON STS.STS_SDN_S_ID = SDN.SDN_S_ID AND STS.STS_SDN_ID = SDN.SDN_ID
+    JOIN ZKT_ZALACZNIKI ZAL ON ST.S_ID = ZAL.ZAL_S_ID
+WHERE 
+
+    NOT EXISTS ( SELECT 1 FROM SDN_ZLIKW ZL WHERE ZL.S_ID = ST.S_ID)
+    AND SDN.SDN_TYP_DATY = 'O'
+    AND SYSDATE BETWEEN STS.STS_DATA_OD AND STS.STS_DATA_DO
+    -- AND UPPER( ZAL.ZAL_NAZWA_PLIKU ) NOT LIKE '%.JPG'
+;
