@@ -11,3 +11,7 @@
 - **ST_zalaczniki_blob.sql** - Unique BLOB attachments for fixed assets
 - **ST_zalaczniki_blob_cx_oracle.py** - Downloads attachments from the Oracle database and saves them to disk (cx_Oracle Python module)
 - **ST_zalaczniki_blob_oracledb.py** - Downloads attachments from the Oracle database and saves them to disk (oracledb Python module)
+
+---
+
+[Oracle Instant Client Downloads](https://www.oracle.com/database/technologies/instant-client/downloads.html)
