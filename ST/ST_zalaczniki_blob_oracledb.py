@@ -1,3 +1,6 @@
+# Skrypt do pobierania załączników z bazy danych Oracle i zapisywania ich na dysku
+# Oracle Instant Client Downloads https://www.oracle.com/database/technologies/instant-client/downloads.html
+
 import oracledb
 import getpass
 import os
