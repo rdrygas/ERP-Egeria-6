@@ -1,4 +1,5 @@
 # ERP Egeria 6
+- EK - Ewidencja Kadrowa / Human Resources
 - GM - Gospodarka Magazynowa / Warehouse Management
 - ST - Środki Trwałe / Fixed Assets
 
